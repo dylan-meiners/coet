@@ -1,0 +1,68 @@
+.App {
+  width: 100vw;
+  height: calc(100dvh - 1px);
+  background-color: var(--bg);
+  padding: 20px;
+  display: grid;
+  grid-template:
+    "header header" 60px
+    "nav content" 1fr
+    / 200px 1fr;
+  gap: 20px;
+}
+
+.App > * {
+  border-radius: 8px;
+  background: var(--bg-el);
+  position: relative;
+  padding: 20px;
+  transform-style: preserve-3d;
+}
+
+.App > *::before,
+.App > *::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(var(--angle), #00e5ff, #7c3aed, #ff2bd6);
+  animation: spin 10s linear infinite;
+}
+
+.App > *::before {
+  padding: 3px;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.App > *::after {
+  filter: blur(10px);
+  opacity: 0.55;
+  transform: translateZ(-1px);
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.header {
+  grid-area: header;
+}
+
+.nav {
+  grid-area: nav;
+}
+
+.content {
+  grid-area: content;
+}
