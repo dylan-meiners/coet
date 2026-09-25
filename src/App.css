@@ -1,6 +1,6 @@
 .App {
   width: 100vw;
-  height: calc(100dvh - 1px);
+  height: 100vh;
   background-color: var(--bg);
   padding: 20px;
   display: grid;
@@ -27,6 +27,7 @@
   border-radius: inherit;
   background: linear-gradient(var(--angle), #00e5ff, #7c3aed, #ff2bd6);
   animation: spin 10s linear infinite;
+  pointer-events: none;
 }
 
 .App > *::before {
