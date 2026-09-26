@@ -28,8 +28,11 @@ export function OrbitVisualizer() {
       0.01,
       1000,
     );
-
-    camera.position.set(2.5, -3, 1.8);
+    const direction = new THREE.Vector3(1, 1, 1);
+    direction.normalize();
+    direction.multiplyScalar(3);
+    camera.position.copy(direction);
+    camera.lookAt(0, 0, 0);
 
     // Renderer
 
