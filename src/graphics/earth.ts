@@ -1,8 +1,10 @@
 import * as THREE from "three";
-import { createCoastlines } from "./coastlines";
 import { createRing } from "./ring";
+import { createAxis } from "./axis";
+import { createEquatorialPlane } from "./plane";
+// import { EciVector } from "./coordinates";
 
-export function createEarth(): Promise<THREE.Group> {
+export function createEarth(): THREE.Group {
   const group = new THREE.Group();
 
   const earthGeometry = new THREE.SphereGeometry(1, 96, 96);
@@ -58,9 +60,40 @@ export function createEarth(): Promise<THREE.Group> {
   mesh.name = "earth-mesh";
   group.add(mesh);
 
-  const equatorRing = createRing(1.2, 0.02);
+  const equatorRing = createRing(1, 0.005, new THREE.Color("#00e5ff"));
   equatorRing.name = "equator-ring";
   group.add(equatorRing);
+
+  const equatorialPlane = createEquatorialPlane(10, new THREE.Color("#00e5ff"));
+  equatorialPlane.name = "equatorial-plane";
+  group.add(equatorialPlane);
+
+  const axisX = createAxis(
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(0, 0, 2),
+    0.02,
+    new THREE.Color("red"),
+  );
+  axisX.name = "axis-x";
+  group.add(axisX);
+
+  const axisY = createAxis(
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(2, 0, 0),
+    0.02,
+    new THREE.Color("green"),
+  );
+  axisY.name = "axis-y";
+  group.add(axisY);
+
+  const axisZ = createAxis(
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(0, 2, 0),
+    0.02,
+    new THREE.Color("blue"),
+  );
+  axisZ.name = "axis-z";
+  group.add(axisZ);
 
   // const coastlines = await createCoastlines();
   // group.add(coastlines);

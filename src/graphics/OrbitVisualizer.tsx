@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { createEarth } from "./earth";
 import { disposeScene } from "./util";
+import { createOrbit } from "./orbit";
 
 export function OrbitVisualizer() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -30,7 +31,7 @@ export function OrbitVisualizer() {
     );
     const direction = new THREE.Vector3(1, 1, 1);
     direction.normalize();
-    direction.multiplyScalar(3);
+    direction.multiplyScalar(4);
     camera.position.copy(direction);
     camera.lookAt(0, 0, 0);
 
@@ -45,11 +46,21 @@ export function OrbitVisualizer() {
 
     // Earth
 
-    async function setupEarth() {
-      const earth = await createEarth();
-      scene.add(earth);
-    }
-    setupEarth();
+    const earth = createEarth();
+    scene.add(earth);
+
+    const orbit = createOrbit(
+      {
+        a: 3,
+        e: 0.2,
+        i: Math.PI / 4,
+        o: Math.PI / 2,
+        w: -Math.PI / 2,
+        v: 0,
+      },
+      new THREE.Color("yellow"),
+    );
+    scene.add(orbit);
 
     // Light
 
