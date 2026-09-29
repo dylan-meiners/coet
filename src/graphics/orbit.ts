@@ -1,14 +1,6 @@
 import * as THREE from "three";
 import { ParametricGeometry } from "three/addons/geometries/ParametricGeometry.js";
-
-export type COEs = {
-  a: number;
-  e: number;
-  i: number;
-  o: number;
-  w: number;
-  v: number;
-};
+import { type COEs } from "../simulation/types";
 
 export function createOrbit(coes: COEs, color: THREE.Color): THREE.Group {
   const group = new THREE.Group();

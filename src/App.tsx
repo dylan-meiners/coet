@@ -1,5 +1,5 @@
 import "./App.css";
-import { OrbitVisualizer } from "./graphics/OrbitVisualizer";
+import { OrbitVisualizer } from "./components/OrbitVisualizer";
 
 function App() {
   return (
